@@ -1,0 +1,76 @@
+name: Pipeline do consumer
+
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  PACT_BROKER_BASE_URL: https://paulogoncalves.pactflow.io
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+
+jobs:
+  test-contract:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Project checkout
+      uses: actions/checkout@v2
+    - run: docker-compose build test-contract-consumer
+    - name: Run consumer contract test
+      run: make test-contract-consumer
+    - run: docker pull pactfoundation/pact-cli:latest
+    - name: Publish contract test result
+      run: |
+        docker run --rm \
+          -w ${PWD} \
+          -v ${PWD}:${PWD} \
+          -e PACT_BROKER_BASE_URL \
+          -e PACT_BROKER_TOKEN \
+          pactfoundation/pact-cli \
+          publish \
+          ${PWD}/consumer-front/pacts \
+          --consumer-app-version ${{ github.sha }} \
+          --tag-with-git-branch
+
+  # Runs on branches as well, so we know the status of our PRs
+  can-i-deploy-to-production:
+    runs-on: ubuntu-18.04
+    needs: test-contract
+    steps:
+    - uses: actions/checkout@v2
+    - run: docker pull pactfoundation/pact-cli:latest
+    - name: Can I deploy to production?
+      run: |
+        docker run --rm \
+          -e PACT_BROKER_BASE_URL \
+          -e PACT_BROKER_TOKEN \
+          pactfoundation/pact-cli \
+          broker can-i-deploy \
+          --pacticipant sample-Frontend \
+          --version ${{ github.sha }} \
+          --retry-while-unknown 30 \
+          --retry-interval 10 \
+          --to production
+
+  # Only deploy from main
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: can-i-deploy-to-production
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy
+      run: |
+        echo "\n========== STAGE: deploy ==========\n"
+        echo "Deploying to production"
+        echo "\n========== Deploy finished ==========\n"
+    - run: docker pull pactfoundation/pact-cli:latest
+    - name: Tag the pact contract with 'production' tag
+      run: |
+        docker run --rm \
+          -e PACT_BROKER_BASE_URL \
+          -e PACT_BROKER_TOKEN \
+          pactfoundation/pact-cli \
+          broker create-version-tag \
+          --pacticipant sample-Frontend \
+          --version ${{ github.sha }} \
+          --tag production

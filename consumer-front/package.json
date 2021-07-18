@@ -1,0 +1,23 @@
+{
+  "name": "tau-pact-nodejs-course",
+  "description": "A simple Nodejs + jest project configuring contract tests with PactJS",
+  "author": "Paulo Gonçalves <paulorochag@hotmail.com> (https://www.linkedin.com/in/paulo-goncalves/)",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PauloGoncalvesBH/sample-teste-de-contrato.git"
+  },
+  "scripts": {
+    "start": "node ./src/consumerService.js",
+    "test:contract": "mocha ./test/contract --timeout 60000"
+  },
+  "dependencies": {
+    "axios": "0.19.0",
+    "express": "4.17.1"
+  },
+  "devDependencies": {
+    "@pact-foundation/pact": "9.15.5",
+    "chai": "4.3.4",
+    "mocha": "8.3.2"
+  }
+}

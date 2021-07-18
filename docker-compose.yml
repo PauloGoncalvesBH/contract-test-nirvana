@@ -1,0 +1,31 @@
+version: '2.1'
+
+services:
+  base:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.test
+    volumes:
+      - ./test:/app/test
+
+  test-contract-provider:
+    extends: base
+    environment:
+      - PACT_BROKER_TOKEN
+      - GITHUB_BRANCH
+      - PACT_URL
+      - TRIGGERED_BY_PACT_CHANGE
+      - PACT_BROKER_BASE_URL
+      - GITHUB_ACTIONS
+      - VERBOSE
+    command: npm run test:contract
+
+  test-contract-consumer:
+    build:
+      context: ./consumer-front
+      dockerfile: ./Dockerfile.test
+    volumes:
+      - ./consumer-front/test:/app/test
+      - ./consumer-front/pacts:/app/pacts
+      - ./consumer-front/logs:/app/logs
+    command: npm run test:contract
