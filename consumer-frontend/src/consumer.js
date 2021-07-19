@@ -16,27 +16,27 @@ const getClients = async () => {
 }
 
 const getClient = async (id) => {
-      const res = await axios
-        .get(`${getApiEndpoint}/clients/${id}`)
-        .then((res) => {
-          return res;
-        })
-        .catch((err) => {
-          return err.res
-        })
-    return res
+  const res = await axios
+    .get(`${getApiEndpoint}/clients/${id}`)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err.res
+    })
+  return res
 }
 
 const postClient = async (body) => {
-      const res = await axios
-      .post(`${getApiEndpoint}/clients`, body, {'Content-Type': 'application/json;charset=utf-8'})
-      .then((res) => {
-          return res
-        })
-        .catch((err) => {
-          return err.res
-        })
-    return res
+  const res = await axios
+    .post(`${getApiEndpoint}/clients`, body, {'Content-Type': 'application/json;charset=utf-8'})
+    .then((res) => {
+      return res
+    })
+    .catch((err) => {
+      return err.res
+    })
+  return res
 }
 
 
