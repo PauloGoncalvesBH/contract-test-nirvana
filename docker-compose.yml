@@ -1,25 +1,41 @@
 version: '2.1'
 
 services:
-  test-contract-provider:
+# Serviços do Provider (sample-clientsService)
+  base-provider:
     build:
-      context: ./provider-back
+      context: ./provider-clients-service
       dockerfile: ./Dockerfile
+
+  provider-start:
+    extends: base-provider
+    command: npm start
+
+  provider-test-contract:
+    extends: base-provider
     command: npm run test:contract
     volumes:
-      - ./provider-back/test:/app/test
+      - ./provider-clients-service/test:/app/test
       - ./.git:/app/.git
     environment:
       - PACT_BROKER_TOKEN
       - PACT_URL
       - CI
 
-  test-contract-consumer:
+# Serviços do Consumer (sample-Frontend)
+  base-consumer:
     build:
-      context: ./consumer-front
+      context: ./consumer-frontend
       dockerfile: ./Dockerfile
+
+  consumer-start:
+    extends: base-consumer
+    command: npm start
+
+  consumer-test-contract:
+    extends: base-consumer
     command: npm run test:contract
     volumes:
-      - ./consumer-front/test:/app/test
-      - ./consumer-front/pacts:/app/pacts
-      - ./consumer-front/logs:/app/logs
+      - ./consumer-frontend/test:/app/test
+      - ./consumer-frontend/pacts:/app/pacts
+      - ./consumer-frontend/logs:/app/logs

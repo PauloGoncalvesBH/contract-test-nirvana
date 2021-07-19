@@ -15,9 +15,9 @@ jobs:
     steps:
     - name: Project checkout
       uses: actions/checkout@v2
-    - run: docker-compose build test-contract-provider
+    - run: docker-compose build provider-test-contract
     - name: Run provider contract test
-      run: make test-contract-provider
+      run: make provider-test-contract
 
   # Runs on branches as well, so we know the status of our PRs
   can-i-deploy-to-production:

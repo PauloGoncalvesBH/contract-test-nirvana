@@ -1,7 +1,17 @@
-.PHONY: test-contract-consumer test-contract-provider
+.PHONY: provider-start provider-test-contract consumer-start consumer-test-contract 
 
-test-contract-consumer:
-	@docker-compose run --rm test-contract-consumer
+# Comandos do Provider (sample-clientsService)
 
-test-contract-provider:
-	@docker-compose run --rm test-contract-provider
+provider-start:
+	@docker-compose run --rm provider-start
+
+provider-test-contract:
+	@docker-compose run --rm provider-test-contract
+
+# Comandos do Consumer (sample-Frontend)
+
+consumer-start:
+	@docker-compose run --rm consumer-start
+
+consumer-test-contract:
+	@docker-compose run --rm consumer-test-contract

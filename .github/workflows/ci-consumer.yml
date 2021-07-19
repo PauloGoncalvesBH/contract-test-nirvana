@@ -15,9 +15,9 @@ jobs:
     steps:
     - name: Project checkout
       uses: actions/checkout@v2
-    - run: docker-compose build test-contract-consumer
+    - run: docker-compose build consumer-test-contract
     - name: Run consumer contract test
-      run: make test-contract-consumer
+      run: make consumer-test-contract
     - run: docker pull pactfoundation/pact-cli:latest
     - name: Publish contract test result
       run: |
@@ -28,7 +28,7 @@ jobs:
           -e PACT_BROKER_TOKEN \
           pactfoundation/pact-cli \
           publish \
-          ${PWD}/consumer-front/pacts \
+          ${PWD}/consumer-frontend/pacts \
           --consumer-app-version ${{ github.sha }} \
           --tag-with-git-branch
 

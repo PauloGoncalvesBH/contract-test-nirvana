@@ -25,9 +25,9 @@ jobs:
     steps:
     - name: Project checkout
       uses: actions/checkout@v2
-    - run: docker-compose build test-contract-provider
+    - run: docker-compose build provider-test-contract
     - name: Run provider contract test
-      run: make test-contract-provider
+      run: make provider-test-contract
       env:
         PACT_URL: ${{ github.event.client_payload.pactUrl }}
         PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
