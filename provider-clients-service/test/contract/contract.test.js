@@ -32,9 +32,10 @@ describe("Clients Service Verification", () => {
       verbose: false
     }
 
-    // Para builds que foram 'trigados' por webhook de 'mudança de conteúdo de contrato' é preciso verificar apenas o contrato (pact) alterado.
+    // Para builds que foram 'trigados' por webhook de 'mudança de conteúdo de contrato'
+    //  é preciso verificar apenas o contrato (pact) alterado.
     // A URL (env PACT_URL) será passada pelo webhook para o job de CI.
-    // https://docs.pact.io/provider/recommended_configurtion/#verification-triggered-by-pact-change
+    // https://docs.pact.io/provider/recommended_configuration/#verification-triggered-by-pact-change
     const pactChangedOptions = {
       pactUrls: [process.env.PACT_URL]
     }
