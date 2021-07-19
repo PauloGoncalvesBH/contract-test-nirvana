@@ -7,8 +7,7 @@ RUN apk --no-cache add ca-certificates wget bash \
   && apk add glibc-2.29-r0.apk
 
 COPY package.json /tmp/package.json
-COPY package-lock.json /tmp/package-lock.json
-RUN cd /tmp && npm ci --silent
+RUN cd /tmp && npm i
 RUN mkdir -p /app && cp -a /tmp/node_modules /app/
 
 WORKDIR /app

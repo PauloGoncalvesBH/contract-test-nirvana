@@ -1,4 +1,4 @@
-name: Pipeline do consumer
+name: Pipeline do provider
 
 on:
   push:
@@ -9,34 +9,21 @@ env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
 
 jobs:
-  test-contract-consumer:
+  test-contract-provider:
     runs-on: ubuntu-18.04
-    name: Run consumer contract test
+    name: Run provider contract test
     steps:
     - name: Project checkout
       uses: actions/checkout@v2
-    - run: docker-compose build test-contract-consumer
-    - name: Run consumer contract test
-      run: make test-contract-consumer
-    - run: docker pull pactfoundation/pact-cli:latest
-    - name: Publish contract test result
-      run: |
-        docker run --rm \
-          -w ${PWD} \
-          -v ${PWD}:${PWD} \
-          -e PACT_BROKER_BASE_URL \
-          -e PACT_BROKER_TOKEN \
-          pactfoundation/pact-cli \
-          publish \
-          ${PWD}/consumer-front/pacts \
-          --consumer-app-version ${{ github.sha }} \
-          --tag-with-git-branch
+    - run: docker-compose build test-contract-provider
+    - name: Run provider contract test
+      run: make test-contract-provider
 
   # Runs on branches as well, so we know the status of our PRs
   # can-i-deploy-to-production:
   #   runs-on: ubuntu-18.04
-  #   needs: test-contract-consumer
-  #   name: Can deploy consumer to 'production'?
+  #   needs: test-contract-provider
+  #   name: Can deploy provider to 'production'?
   #   steps:
   #   - uses: actions/checkout@v2
   #   - run: docker pull pactfoundation/pact-cli:latest
@@ -47,7 +34,7 @@ jobs:
   #         -e PACT_BROKER_TOKEN \
   #         pactfoundation/pact-cli \
   #         broker can-i-deploy \
-  #         --pacticipant sample-Frontend \
+  #         --pacticipant sample-ClientsService \
   #         --version ${{ github.sha }} \
   #         --retry-while-unknown 30 \
   #         --retry-interval 10 \
@@ -56,10 +43,10 @@ jobs:
   # Only deploy from main
   deploy:
     if: github.ref == 'refs/heads/main'
-    needs: test-contract-consumer
+    needs: test-contract-provider
     # needs: can-i-deploy-to-production
     runs-on: ubuntu-18.04
-    name: Deploy consumer to 'production'
+    name: Deploy provider to 'production'
     steps:
     - uses: actions/checkout@v2
     - name: Deploy
@@ -68,7 +55,7 @@ jobs:
         echo "Deploying to production"
         echo "\n========== Deploy finished ==========\n"
 
-  tag-pact-contract-as-production:
+  tag-verification-result-as-production:
     needs: deploy
     runs-on: ubuntu-18.04
     name: Tag pact contract as 'production'
@@ -82,6 +69,6 @@ jobs:
           -e PACT_BROKER_TOKEN \
           pactfoundation/pact-cli \
           broker create-version-tag \
-          --pacticipant sample-Frontend \
+          --pacticipant sample-ClientsService \
           --version ${{ github.sha }} \
           --tag production
