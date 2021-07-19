@@ -5,6 +5,7 @@ services:
     build:
       context: ./provider-back
       dockerfile: ./Dockerfile
+    command: npm run test:contract
     volumes:
       - ./provider-back/test:/app/test
       - ./.git:/app/.git
@@ -12,15 +13,13 @@ services:
       - PACT_BROKER_TOKEN
       - PACT_URL
       - CI
-      - GITHUB_BRANCH
-    command: npm run test:contract
 
   test-contract-consumer:
     build:
       context: ./consumer-front
       dockerfile: ./Dockerfile
+    command: npm run test:contract
     volumes:
       - ./consumer-front/test:/app/test
       - ./consumer-front/pacts:/app/pacts
       - ./consumer-front/logs:/app/logs
-    command: npm run test:contract
