@@ -21,6 +21,8 @@ O diagrama abaixo é a representação do Nirvana do Pact que foi implementado n
 
 ![Diagrama - 'Nirvana' do teste de contrato](.github/diagrama-teste-de-contrato.png)
 
+O _pact-cli_ informado no diagrama se refere a comandos do [Pact Broker Client](https://github.com/pact-foundation/pact_broker-client).
+
 ---
 
 # Aplicações
