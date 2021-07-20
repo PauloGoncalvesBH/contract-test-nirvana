@@ -1,18 +1,10 @@
-version: '2.1'
+version: '3.8'
 
 services:
-# Serviços do Provider (sample-clientsService)
-  base-provider:
-    build:
-      context: ./provider-clients-service
-      dockerfile: ./Dockerfile
-
-  provider-start:
-    extends: base-provider
-    command: npm start
-
   provider-test-contract:
-    extends: base-provider
+    build:
+      context: provider-clients-service
+      dockerfile: Dockerfile
     command: npm run test:contract
     volumes:
       - ./provider-clients-service/test:/app/test
@@ -22,18 +14,10 @@ services:
       - PACT_URL
       - CI
 
-# Serviços do Consumer (sample-Frontend)
-  base-consumer:
-    build:
-      context: ./consumer-frontend
-      dockerfile: ./Dockerfile
-
-  consumer-start:
-    extends: base-consumer
-    command: npm start
-
   consumer-test-contract:
-    extends: base-consumer
+    build:
+      context: consumer-frontend
+      dockerfile: Dockerfile
     command: npm run test:contract
     volumes:
       - ./consumer-frontend/test:/app/test
