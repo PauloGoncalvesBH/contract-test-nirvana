@@ -1,4 +1,3 @@
-const isCI = require('is-ci')
 const { Verifier } = require('@pact-foundation/pact')
 
 const { server, importData } = require("../../src/provider")
@@ -28,7 +27,7 @@ describe("Clients Service Verification", () => {
       providerBaseUrl: SERVER_URL,
       providerVersionTags: currentGitBranch,
       providerVersion: currentGitHash,
-      publishVerificationResult: isCI,
+      publishVerificationResult: process.env.CI == 'true',
       verbose: false
     }
 
