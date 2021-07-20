@@ -71,3 +71,17 @@ Para conseguir executar o teste do provider altere o arquivo [docker-compose](do
 ```
 
 A publicação de resultado da execução é feito apenas via CI. (`publishVerificationResult: process.env.CI == 'true'`)
+
+## Webhook
+
+Quando o consumer publica um novo contrato é preciso garantir que o provider tenha feito execução encima desse contrato.
+
+Para que isso ocorra é utilizado webhook no Pactflow que, ao identificar que foi publicado contrato com conteúdo alterado ou uma nova tag (nova branch), trigga a pipeline do provider passando a URL desse contrato.
+
+> A pipeline chamada via webhook é a [provider-ci-triggered-by-webhook.yml](./.github/workflows/provider-ci-triggered-by-webhook.yml).
+
+A configuração do `can-i-deploy` na pipeline do consumer permite que aguarde a execução do teste de contrato pelo provider e a publicação do resultado para saber se é possível ou não prosseguir com o novo contrato.
+
+### Print da configuração de webhook utilizada
+
+![Print de webhook](.github/webhook.png)
