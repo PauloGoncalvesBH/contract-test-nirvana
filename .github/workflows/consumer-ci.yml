@@ -2,6 +2,8 @@ name: Pipeline do consumer
 
 on:
   push:
+    paths-ignore:
+      - 'provider-clients-service/**'
   workflow_dispatch:
 
 env:

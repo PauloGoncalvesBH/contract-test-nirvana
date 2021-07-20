@@ -2,6 +2,8 @@ name: Pipeline do provider
 
 on:
   push:
+    paths-ignore:
+      - 'consumer-frontend/**'
   workflow_dispatch:
 
 env:
