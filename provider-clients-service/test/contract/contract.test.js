@@ -23,7 +23,7 @@ describe("Clients Service Verification", () => {
   it("validates the expectations of Client Service", () => {
     const baseOptions = {
       provider: 'sample-ClientsService',
-      logLevel: 'DEBUG',
+      logLevel: 'INFO',
       pactBrokerToken: process.env.PACT_BROKER_TOKEN,
       providerBaseUrl: SERVER_URL,
       providerVersionTags: currentGitBranch,

@@ -7,7 +7,7 @@ const { getClients, postClient } = require("../../src/consumer")
 
 const mockProvider = new Pact({
   port: 8081,
-  logLevel: 'debug',
+  logLevel: 'INFO',
   consumer: 'sample-Frontend',
   provider: 'sample-ClientsService',
 });
