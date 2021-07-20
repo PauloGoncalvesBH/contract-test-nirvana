@@ -44,12 +44,14 @@ describe("Clients Service Verification", () => {
       consumerVersionSelectors: [
         {
           tag: currentGitBranch,
-          fallbackTag: 'main',
           latest: true
         },
         {
-          tag: 'production',
-          latest: true
+          environment: 'production',
+          deployed: true
+        },
+        {
+          mainBranch: true
         }
       ],
       includeWipPactsSince: isDefaultBranch ? dateOneMonthAgo() : undefined,

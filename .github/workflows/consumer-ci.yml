@@ -53,7 +53,7 @@ jobs:
           --version ${{ github.sha }} \
           --retry-while-unknown 30 \
           --retry-interval 10 \
-          --to production
+          --to-environment production
 
   # Only deploy from main
   deploy:
@@ -69,7 +69,7 @@ jobs:
         echo "Deploying to production"
         echo "\n========== Deploy finished ==========\n"
 
-  tag-pact-contract-as-production:
+  record-deploy:
     needs: deploy
     runs-on: ubuntu-18.04
     name: Tag pact contract as 'production'
@@ -82,7 +82,7 @@ jobs:
           -e PACT_BROKER_BASE_URL \
           -e PACT_BROKER_TOKEN \
           pactfoundation/pact-cli \
-          broker create-version-tag \
+          broker record-deployment \
           --pacticipant sample-Frontend \
           --version ${{ github.sha }} \
-          --tag production
+          --environment production
