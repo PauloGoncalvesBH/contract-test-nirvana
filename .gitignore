@@ -1,7 +1,3 @@
 node_modules/
 pacts/
 logs/
-
-# é uma má prática não versionar o package-lock, mas essa necessidade é devido de
-# que está ocorrendo erro ao realizar 'npm install' na imagem
-package-lock.json

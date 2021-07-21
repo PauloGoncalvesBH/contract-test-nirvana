@@ -3,13 +3,13 @@
 const { expect } = require('chai')
 const { Matchers, Pact } = require("@pact-foundation/pact")
 
-const { getClients, postClient } = require("../../src/consumer")
+const { getClients, postClient } = require("../../consumer-frontend/src/consumer")
 
 const mockProvider = new Pact({
-  port: 8081,
+  consumer: 'frontend',
+  provider: 'clients-service',
   logLevel: 'INFO',
-  consumer: 'sample-Frontend',
-  provider: 'sample-ClientsService',
+  port: 8081
 });
 
 describe('API Pact test - Integration between \'sample-ClientsService\' and \'sample-Frontend\'', () => {
