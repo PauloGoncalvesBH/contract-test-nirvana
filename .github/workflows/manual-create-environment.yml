@@ -1,26 +1,26 @@
-name: Criar ambiente de production
+# name: Criar ambiente de production
 
-on:
-  push:
-  workflow_dispatch:
+# on:
+#   push:
+#   workflow_dispatch:
 
-env:
-  PACT_BROKER_BASE_URL: https://paulogoncalves.pactflow.io
-  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN_ADM }}
+# env:
+#   PACT_BROKER_BASE_URL: https://paulogoncalves.pactflow.io
+#   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN_ADM }}
 
-jobs:
-  create-environment:
-    runs-on: ubuntu-18.04
+# jobs:
+#   create-environment:
+#     runs-on: ubuntu-18.04
 
-    steps:
-    - run: docker pull pactfoundation/pact-cli:latest
-    - name: Create 'production' environment
-      run: |
-        docker run --rm \
-          -e PACT_BROKER_BASE_URL \
-          -e PACT_BROKER_TOKEN \
-          pactfoundation/pact-cli \
-          broker create-environment \
-          --name production \
-          --display-name ambiente-prod \
-          --production
+#     steps:
+#     - run: docker pull pactfoundation/pact-cli:latest
+#     - name: Create 'production' environment
+#       run: |
+#         docker run --rm \
+#           -e PACT_BROKER_BASE_URL \
+#           -e PACT_BROKER_TOKEN \
+#           pactfoundation/pact-cli \
+#           broker create-environment \
+#           --name production \
+#           --display-name ambiente-prod \
+#           --production

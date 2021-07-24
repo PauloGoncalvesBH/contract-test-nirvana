@@ -42,7 +42,7 @@ jobs:
 
   # Only deploy from main
   deploy:
-    if: github.ref == 'refs/heads/main'
+    # if: github.ref == 'refs/heads/main'
     needs: can-i-deploy-to-production
     runs-on: ubuntu-18.04
     name: Deploy provider to 'production'
