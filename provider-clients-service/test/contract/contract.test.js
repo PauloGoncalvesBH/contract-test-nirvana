@@ -28,7 +28,8 @@ describe("Clients Service Verification", () => {
       providerVersionTags: currentGitBranch,
       providerVersion: currentGitHash,
       publishVerificationResult: process.env.CI == 'true',
-      verbose: false
+      verbose: false,
+      timeput: 600000
     }
 
     // Para builds que foram 'trigados' por webhook de 'mudança de conteúdo de contrato'
