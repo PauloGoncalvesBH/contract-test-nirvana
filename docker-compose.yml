@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     command: npm run test:contract
     volumes:
-      - ./provider-clients-service/test:/app/test
+      - ./provider-clients-service/test/contract:/app/test/contract
       - ./.git:/app/.git
     environment:
       - PACT_BROKER_TOKEN
@@ -20,6 +20,6 @@ services:
       dockerfile: Dockerfile
     command: npm run test:contract
     volumes:
-      - ./consumer-frontend/test:/app/test
+      - ./consumer-frontend/test/contract:/app/test/contract
       - ./consumer-frontend/pacts:/app/pacts
       - ./consumer-frontend/logs:/app/logs
