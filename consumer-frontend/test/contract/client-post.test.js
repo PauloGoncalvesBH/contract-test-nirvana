@@ -6,14 +6,18 @@ const { Matchers } = require("@pact-foundation/pact")
 const { postClient } = require("../../src/consumer")
 
 describe('API Pact test - Integration between \'sample-ClientsService\' and \'sample-Frontend\'', () => {
-  describe("POST Client", () => {
-    it("returns correct body, header and statusCode", async () => {
-      const POST_BODY = {
-        firstName: "Paulo",
-        lastName: "Gonçalves",
-        age: 29
-      }
+  describe("POST /client", () => {
+    const requestBody = {
+      firstName: "Paulo",
+      lastName: "Gonçalves",
+      age: 29
+    }
+    const expectedBody = {
+      ...requestBody,
+      id: 3
+    }
 
+    before (async () => {
       await mockProvider.addInteraction({
         state: "i create a new client",
         uponReceiving: "a request to create client with firstname and lastname",
@@ -23,19 +27,18 @@ describe('API Pact test - Integration between \'sample-ClientsService\' and \'sa
           headers: {
             "Content-Type": "application/json;charset=utf-8"
           },
-          body: POST_BODY,
+          body: requestBody,
         },
         willRespondWith: {
           status: 200,
-          body: Matchers.like({
-            ...POST_BODY,
-            id: 3
-          }).contents,
+          body: Matchers.like(expectedBody),
         },
       })
+    })
 
-      const response = await postClient(POST_BODY)
-      expect(response.data.id).to.equal(3)
+    it("returns correct body, header and statusCode", async () => {
+      const response = await postClient(requestBody)
+      expect(response.data).to.deep.equal(expectedBody)
       expect(response.status).to.equal(200)
     })
   })
