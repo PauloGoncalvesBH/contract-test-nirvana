@@ -1,12 +1,13 @@
 const { Verifier } = require('@pact-foundation/pact')
 
-const { server } = require("../../src/provider")
+const { server, clientRepository } = require("../../src/provider")
 const {
   dateOneMonthAgo,
   currentGitBranch,
   currentGitHash,
   isDefaultBranch
 } = require('./util')
+const stateHandlers = require('./state-handlers')
 
 describe("Clients Service Verification", () => {
   const PORT = 3001
@@ -29,11 +30,17 @@ describe("Clients Service Verification", () => {
       publishVerificationResult: process.env.CI == 'true',
       verbose: false,
       timeout: 600000,
+      beforeEach: () => {
+        clientRepository.clear()
+      },
       stateHandlers: {
         'i have a list of clients': async () => {
-          importData()
+          stateHandlers.client.iHaveAListOfClients()
         },
-      }
+        'i have client with id 123': async () => {
+          stateHandlers.client.iHaveClientWithId123()
+        },
+      },
     }
 
     // Para builds que foram 'trigados' por webhook de 'mudança de conteúdo de contrato'
