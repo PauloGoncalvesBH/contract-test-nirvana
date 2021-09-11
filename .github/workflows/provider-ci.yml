@@ -36,7 +36,7 @@ jobs:
           -e PACT_BROKER_TOKEN \
           pactfoundation/pact-cli \
           broker can-i-deploy \
-          --pacticipant sample-ClientsService \
+          --pacticipant clients-service \
           --version ${{ github.sha }} \
           --to production
 
@@ -68,6 +68,6 @@ jobs:
           -e PACT_BROKER_TOKEN \
           pactfoundation/pact-cli \
           broker create-version-tag \
-          --pacticipant sample-ClientsService \
+          --pacticipant clients-service \
           --version ${{ github.sha }} \
           --tag production

@@ -5,7 +5,7 @@ const { Matchers } = require("@pact-foundation/pact")
 
 const { postClient } = require("../../src/consumer")
 
-describe('API Pact test - Integration between \'sample-ClientsService\' and \'sample-Frontend\'', () => {
+describe('API Pact test - Integration between \'clients-service\' and \'frontend\'', () => {
   describe("POST /client", () => {
     const requestBody = {
       firstName: "Paulo",

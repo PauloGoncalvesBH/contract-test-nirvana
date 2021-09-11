@@ -2,9 +2,9 @@ name: Teste de contrato do provider executado via webhook
 
 # https://docs.pact.io/pact_broker/overview/#webhooks
 
-# Quando um novo contrato é publicado pelo consumer (sample-Frontend) ele não foi executado
+# Quando um novo contrato é publicado pelo consumer (frontend) ele não foi executado
 # com nenhuma versão do provider, com isso o pactflow executa webhook que chama essa pipeline
-# e executa o teste de contrato do provider (sample-clientsService), baixando diretamente
+# e executa o teste de contrato do provider (clients-service), baixando diretamente
 # o novo contrato (através do 'pactUrl') e publicando o resultado no pactflow ao final.
 
 # Com isso é possível garantir que todo novo contrato publicado é compatível ou não

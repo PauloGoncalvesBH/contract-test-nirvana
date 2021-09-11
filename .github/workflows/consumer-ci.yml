@@ -49,7 +49,7 @@ jobs:
           -e PACT_BROKER_TOKEN \
           pactfoundation/pact-cli \
           broker can-i-deploy \
-          --pacticipant sample-Frontend \
+          --pacticipant frontend \
           --version ${{ github.sha }} \
           --retry-while-unknown 30 \
           --retry-interval 10 \
@@ -83,6 +83,6 @@ jobs:
           -e PACT_BROKER_TOKEN \
           pactfoundation/pact-cli \
           broker create-version-tag \
-          --pacticipant sample-Frontend \
+          --pacticipant frontend \
           --version ${{ github.sha }} \
           --tag production
