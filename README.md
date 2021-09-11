@@ -68,11 +68,11 @@ Para conseguir executar o teste do provider altere o arquivo [docker-compose](do
 ```diff
     environment:
 -     - PACT_BROKER_TOKEN
-+     - PACT_BROKER_TOKEN='8sRF-XWVFpfLRpLp2B-lLw'
++     - PACT_BROKER_TOKEN=7L0Ijmqyh7LOMk5DyqteLQ
       - PACT_URL
 ```
 
-A publicação de resultado da execução é feito apenas via CI. (`publishVerificationResult: process.env.CI == 'true'`)
+A publicação de resultado da execução é feito apenas via CI e com token de escrita. (`publishVerificationResult: process.env.CI == 'true'`)
 
 ## Webhook
 
