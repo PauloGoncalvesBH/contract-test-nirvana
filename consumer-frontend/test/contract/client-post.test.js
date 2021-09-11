@@ -19,7 +19,6 @@ describe('API Pact test - Integration between \'sample-ClientsService\' and \'sa
 
     before (async () => {
       await mockProvider.addInteraction({
-        state: "i create a new client",
         uponReceiving: "a request to create client with firstname and lastname",
         withRequest: {
           method: "POST",
