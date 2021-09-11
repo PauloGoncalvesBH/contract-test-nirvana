@@ -87,3 +87,7 @@ A configuração do `can-i-deploy` na pipeline do consumer permite que aguarde a
 ### Print da configuração de webhook utilizada
 
 ![Print de webhook](.github/webhook.png)
+
+---
+
+[LICENSE GNU General Public License v3.0](./LICENSE)
