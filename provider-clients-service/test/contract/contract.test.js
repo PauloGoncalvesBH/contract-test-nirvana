@@ -64,7 +64,9 @@ describe("Clients Service Verification", () => {
           latest: true
         }
       ],
+      // https://docs.pact.io/pact_broker/advanced_topics/pending_pacts
       includeWipPactsSince: isDefaultBranch ? dateOneMonthAgo() : undefined,
+      // https://docs.pact.io/pact_broker/advanced_topics/wip_pacts
       enablePending: isDefaultBranch
     }
 
