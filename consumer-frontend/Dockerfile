@@ -8,8 +8,8 @@ RUN apk --no-cache add ca-certificates wget bash \
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
