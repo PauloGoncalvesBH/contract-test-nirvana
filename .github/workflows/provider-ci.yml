@@ -28,13 +28,13 @@ jobs:
     name: Can deploy provider to 'production'?
     steps:
     - uses: actions/checkout@v2
-    - run: docker pull pactfoundation/pact-cli:latest
+    - run: docker pull pactfoundation/pact-cli:0.47.1.0
     - name: Can I deploy to production?
       run: |
         docker run --rm \
           -e PACT_BROKER_BASE_URL \
           -e PACT_BROKER_TOKEN \
-          pactfoundation/pact-cli \
+          pactfoundation/pact-cli:0.47.1.0 \
           broker can-i-deploy \
           --pacticipant clients-service \
           --version ${{ github.sha }} \
@@ -60,13 +60,13 @@ jobs:
     name: Tag pact contract as 'production'
     steps:
     - uses: actions/checkout@v2
-    - run: docker pull pactfoundation/pact-cli:latest
+    - run: docker pull pactfoundation/pact-cli:0.47.1.0
     - name: Tag the pact contract with 'production' tag
       run: |
         docker run --rm \
           -e PACT_BROKER_BASE_URL \
           -e PACT_BROKER_TOKEN \
-          pactfoundation/pact-cli \
+          pactfoundation/pact-cli:0.47.1.0 \
           broker create-version-tag \
           --pacticipant clients-service \
           --version ${{ github.sha }} \
