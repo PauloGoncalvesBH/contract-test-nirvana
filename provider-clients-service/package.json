@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node ./src/providerService.js",
-    "test:contract": "mocha ./test/contract --timeout 600000 --exit"
+    "test:contract": "mocha ./test/contract --timeout 600000 --exit --color"
   },
   "dependencies": {
     "axios": "0.21.1",
