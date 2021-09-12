@@ -1,13 +1,14 @@
 const { Verifier } = require('@pact-foundation/pact')
+const path = require("path")
 
 const { server, clientRepository } = require("../../src/provider")
-const {
-  dateOneMonthAgo,
-  currentGitBranch,
-  currentGitHash,
-  isDefaultBranch
-} = require('./util')
-const stateHandlers = require('./state-handlers')
+// const {
+//   dateOneMonthAgo,
+//   currentGitBranch,
+//   currentGitHash,
+//   isDefaultBranch
+// } = require('./util')
+// const stateHandlers = require('./state-handlers')
 
 describe("Clients Service Verification", () => {
   const PORT = 3001
@@ -21,36 +22,28 @@ describe("Clients Service Verification", () => {
 
   it("validates the expectations of Client Service", () => {
     const baseOptions = {
-      provider: 'clients-service',
+      // provider: 'app-clients-service',
       logLevel: 'INFO',
-      pactBrokerToken: process.env.PACT_BROKER_TOKEN,
+      // pactBrokerToken: process.env.PACT_BROKER_TOKEN,
       providerBaseUrl: SERVER_URL,
-      providerVersionTags: currentGitBranch,
-      providerVersion: currentGitHash,
-      publishVerificationResult: process.env.CI == 'true',
+      // providerVersionTags: currentGitBranch,
+      // providerVersion: currentGitHash,
+      // publishVerificationResult: process.env.CI == 'true',
       verbose: false,
       timeout: 600000,
-      beforeEach: () => {
-        clientRepository.clear()
-      },
-      stateHandlers: {
-        'i have a list of clients': async () => {
-          stateHandlers.client.iHaveAListOfClients()
-        },
-        'i have client with id 123': async () => {
-          stateHandlers.client.iHaveClientWithId123()
-        },
-      },
     }
 
     // Para builds que foram 'trigados' por webhook de 'mudança de conteúdo de contrato'
     //  é preciso verificar apenas o contrato (pact) alterado.
     // A URL (env PACT_URL) será passada pelo webhook para o job de CI.
     // https://docs.pact.io/provider/recommended_configuration/#verification-triggered-by-pact-change
+    /*
     const pactChangedOptions = {
       pactUrls: [process.env.PACT_URL]
     }
+    */
 
+    /*
     const fetchPactsDynamicallyOptions = {
       pactBrokerUrl: 'https://paulogoncalves.pactflow.io',
       consumerVersionSelectors: [
@@ -69,10 +62,17 @@ describe("Clients Service Verification", () => {
       // https://docs.pact.io/pact_broker/advanced_topics/wip_pacts
       enablePending: isDefaultBranch
     }
+    */
 
     return new Verifier({
         ...baseOptions,
-        ...(process.env.PACT_URL ? pactChangedOptions : fetchPactsDynamicallyOptions)
+        // ...(process.env.PACT_URL ? pactChangedOptions : fetchPactsDynamicallyOptions)
+        pactUrls: [
+          path.resolve(
+            process.cwd(),
+            "../consumer-frontend/pacts/app-frontend-app-clients-service.json"
+          ),
+        ],
       })
       .verifyProvider()
       .then(output => {

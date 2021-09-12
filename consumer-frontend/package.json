@@ -9,7 +9,6 @@
   },
   "scripts": {
     "start": "node ./src/consumerService.js",
-    "pretest:contract": "del-cli pacts/**",
     "test:contract": "mocha --config test/contract/.mocharc.js"
   },
   "dependencies": {

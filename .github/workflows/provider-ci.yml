@@ -1,73 +1,73 @@
-name: Pipeline do provider
+# name: Pipeline do provider
 
-on:
-  push:
-    paths-ignore:
-      - 'consumer-frontend/**'
-  workflow_dispatch:
+# on:
+#   push:
+#     paths-ignore:
+#       - 'consumer-frontend/**'
+#   workflow_dispatch:
 
-env:
-  PACT_BROKER_BASE_URL: https://paulogoncalves.pactflow.io
-  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+# env:
+#   PACT_BROKER_BASE_URL: https://paulogoncalves.pactflow.io
+#   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
 
-jobs:
-  test-contract-provider:
-    runs-on: ubuntu-18.04
-    name: Run provider contract test
-    steps:
-    - name: Project checkout
-      uses: actions/checkout@v2
-    - run: docker-compose build provider-test-contract
-    - name: Run provider contract test
-      run: make provider-test-contract
+# jobs:
+#   test-contract-provider:
+#     runs-on: ubuntu-18.04
+#     name: Run provider contract test
+#     steps:
+#     - name: Project checkout
+#       uses: actions/checkout@v2
+#     - run: docker-compose build provider-test-contract
+#     - name: Run provider contract test
+#       run: make provider-test-contract
 
-  # Runs on branches as well, so we know the status of our PRs
-  can-i-deploy-to-production:
-    runs-on: ubuntu-18.04
-    needs: test-contract-provider
-    name: Can deploy provider to 'production'?
-    steps:
-    - uses: actions/checkout@v2
-    - run: docker pull pactfoundation/pact-cli:0.47.1.0
-    - name: Can I deploy to production?
-      run: |
-        docker run --rm \
-          -e PACT_BROKER_BASE_URL \
-          -e PACT_BROKER_TOKEN \
-          pactfoundation/pact-cli:0.47.1.0 \
-          broker can-i-deploy \
-          --pacticipant clients-service \
-          --version ${{ github.sha }} \
-          --to production
+#   # Runs on branches as well, so we know the status of our PRs
+#   can-i-deploy-to-production:
+#     runs-on: ubuntu-18.04
+#     needs: test-contract-provider
+#     name: Can deploy provider to 'production'?
+#     steps:
+#     - uses: actions/checkout@v2
+#     - run: docker pull pactfoundation/pact-cli:0.47.1.0
+#     - name: Can I deploy to production?
+#       run: |
+#         docker run --rm \
+#           -e PACT_BROKER_BASE_URL \
+#           -e PACT_BROKER_TOKEN \
+#           pactfoundation/pact-cli:0.47.1.0 \
+#           broker can-i-deploy \
+#           --pacticipant app-clients-service \
+#           --version ${{ github.sha }} \
+#           --to production
 
-  # Only deploy from main
-  deploy:
-    if: github.ref == 'refs/heads/main'
-    needs: can-i-deploy-to-production
-    runs-on: ubuntu-18.04
-    name: Deploy provider to 'production'
-    steps:
-    - uses: actions/checkout@v2
-    - name: Deploy
-      run: |
-        echo "\n========== STAGE: deploy ==========\n"
-        echo "Deploying to production"
-        echo "\n========== Deploy finished ==========\n"
+#   # Only deploy from main
+#   deploy:
+#     if: github.ref == 'refs/heads/main'
+#     needs: can-i-deploy-to-production
+#     runs-on: ubuntu-18.04
+#     name: Deploy provider to 'production'
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Deploy
+#       run: |
+#         echo "\n========== STAGE: deploy ==========\n"
+#         echo "Deploying to production"
+#         echo "\n========== Deploy finished ==========\n"
 
-  tag-verification-result-as-production:
-    needs: deploy
-    runs-on: ubuntu-18.04
-    name: Tag pact contract as 'production'
-    steps:
-    - uses: actions/checkout@v2
-    - run: docker pull pactfoundation/pact-cli:0.47.1.0
-    - name: Tag the pact contract with 'production' tag
-      run: |
-        docker run --rm \
-          -e PACT_BROKER_BASE_URL \
-          -e PACT_BROKER_TOKEN \
-          pactfoundation/pact-cli:0.47.1.0 \
-          broker create-version-tag \
-          --pacticipant clients-service \
-          --version ${{ github.sha }} \
-          --tag production
+#   tag-verification-result-as-production:
+#     needs: deploy
+#     runs-on: ubuntu-18.04
+#     name: Tag pact contract as 'production'
+#     steps:
+#     - uses: actions/checkout@v2
+#     - run: docker pull pactfoundation/pact-cli:0.47.1.0
+#     - name: Tag the pact contract with 'production' tag
+#       run: |
+#         docker run --rm \
+#           -e PACT_BROKER_BASE_URL \
+#           -e PACT_BROKER_TOKEN \
+#           pactfoundation/pact-cli:0.47.1.0 \
+#           broker create-version-tag \
+#           --pacticipant app-clients-service \
+#           --version ${{ github.sha }} \
+#           --tag production
