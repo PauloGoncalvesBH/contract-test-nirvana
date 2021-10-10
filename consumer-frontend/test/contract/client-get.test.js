@@ -16,7 +16,7 @@ describe('API Pact test - Integration between \'clients-service\' and \'frontend
 
     before (async () => {
       await mockProvider.addInteraction({
-        state: "i have a list of clients",
+        state: "i have a xpto",
         uponReceiving: "a request for all clients",
         withRequest: {
           method: "GET",
