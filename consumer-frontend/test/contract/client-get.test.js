@@ -10,13 +10,12 @@ describe('API Pact test - Integration between \'clients-service\' and \'frontend
     const expectedBody = {
       firstName: 'Lisa',
       lastName: 'Simpson',
-      age: 8,
-      id: 1
+      age: 8
     }
 
     before (async () => {
       await mockProvider.addInteraction({
-        state: "i have a xpto",
+        state: "i have a xpto asd",
         uponReceiving: "a request for all clients",
         withRequest: {
           method: "GET",

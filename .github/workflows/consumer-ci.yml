@@ -51,8 +51,8 @@ jobs:
           broker can-i-deploy \
           --pacticipant frontend \
           --version ${{ github.sha }} \
-          --retry-while-unknown 30 \
-          --retry-interval 10 \
+          --retry-while-unknown 18 \
+          --retry-interval 5 \
           --to production
 
   # Only deploy from main
