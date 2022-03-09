@@ -11,12 +11,13 @@
     "start": "node ./src/providerService.js"
   },
   "dependencies": {
-    "axios": "0.19.0",
+    "axios": "0.21.1",
     "cors": "2.8.5",
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "express-validation": "3.0.8"
   },
   "devDependencies": {
-    "@pact-foundation/pact": "^9.15.5",
-    "mocha": "8.3.2"
+    "@pact-foundation/pact": "9.16.1",
+    "mocha": "8.4.0"
   }
 }
