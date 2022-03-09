@@ -7,7 +7,6 @@
     "url": "https://github.com/PauloGoncalvesBH/nirvana-teste-de-contrato.git"
   },
   "scripts": {
-    "start": "node ./src/providerService.js",
     "test:contract:provider": "mocha ./test/contract/provider.test.js --timeout 60000 --exit",
     "test:contract:consumer": "mocha ./test/contract/consumer.test.js --timeout 60000 --exit"
   },

@@ -1,6 +1,9 @@
 const express = require("express")
 const cors = require("cors")
+const { ValidationError } = require('express-validation')
+
 const Repository = require("./repository")
+const { validatePostSchema } = require('./schema')
 
 const server = express()
 server.use(cors())
@@ -45,22 +48,19 @@ server.get("/clients/:id", (req, res) => {
 })
 
 // Add a new Client
-server.post("/clients", (req, res) => {
+server.post("/clients", validatePostSchema(), (req, res) => {
   const client = req.body
-
-  // Basic validation for missing first name field
-  if (!client || !client.firstName) {
-    res.status(400)
-    res.send({message:'Missing first name!', body: req.body})
-    res.end()
-
-    return
-  }
-
   client.id = clientRepository.fetchAll().length
   clientRepository.add(client)
 
   res.json(client)
+})
+
+server.use((err, req, res, next) => {
+  if (err instanceof ValidationError) {
+    return res.status(err.statusCode).json(err)
+  }
+  next()
 })
 
 module.exports = {
