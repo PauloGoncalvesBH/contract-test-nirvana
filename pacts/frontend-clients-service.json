@@ -1,0 +1,108 @@
+{
+  "consumer": {
+    "name": "frontend"
+  },
+  "provider": {
+    "name": "clients-service"
+  },
+  "interactions": [
+    {
+      "description": "a request for one client",
+      "providerState": "i have a list of one client",
+      "request": {
+        "method": "GET",
+        "path": "/clients/2",
+        "headers": {
+          "Accept": "application/json, text/plain, */*"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "firstName": "Wonder",
+          "lastName": "Woman",
+          "age": 30,
+          "id": 2
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "a request for all clients",
+      "providerState": "i have a list of clients",
+      "request": {
+        "method": "GET",
+        "path": "/clients",
+        "headers": {
+          "Accept": "application/json, text/plain, */*"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": [
+          {
+            "firstName": "Lisa",
+            "lastName": "Simpson",
+            "age": 8,
+            "id": 1
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "a request for add clients",
+      "request": {
+        "method": "POST",
+        "path": "/clients",
+        "headers": {
+          "Content-Type": "application/json;charset=utf-8"
+        },
+        "body": {
+          "firstName": "Lisa",
+          "lastName": "Simpson",
+          "age": 8
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "firstName": "Lisa",
+          "lastName": "Simpson",
+          "age": 8,
+          "id": 1
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

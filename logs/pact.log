@@ -1,0 +1,191 @@
+I, [2022-03-09T21:29:59.628907 #29]  INFO -- : Registered expected interaction GET /clients/2
+D, [2022-03-09T21:29:59.629476 #29] DEBUG -- : {
+  "description": "a request for one client",
+  "providerState": "i have a list of one client",
+  "request": {
+    "method": "GET",
+    "path": "/clients/2",
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": {
+      "json_class": "Pact::SomethingLike",
+      "contents": {
+        "firstName": "Wonder",
+        "lastName": "Woman",
+        "age": 30,
+        "id": 2
+      }
+    }
+  },
+  "metadata": null
+}
+I, [2022-03-09T21:29:59.640331 #29]  INFO -- : Received request GET /clients/2
+D, [2022-03-09T21:29:59.640595 #29] DEBUG -- : {
+  "path": "/clients/2",
+  "query": "",
+  "method": "get",
+  "headers": {
+    "Accept": "application/json, text/plain, */*",
+    "User-Agent": "axios/0.19.0",
+    "Host": "localhost:8081",
+    "Connection": "close",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-03-09T21:29:59.640934 #29]  INFO -- : Found matching response for GET /clients/2
+D, [2022-03-09T21:29:59.641115 #29] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "json_class": "Pact::SomethingLike",
+    "contents": {
+      "firstName": "Wonder",
+      "lastName": "Woman",
+      "age": 30,
+      "id": 2
+    }
+  }
+}
+I, [2022-03-09T21:29:59.650446 #29]  INFO -- : Verifying - interactions matched
+I, [2022-03-09T21:29:59.655433 #29]  INFO -- : Cleared interactions
+I, [2022-03-09T21:29:59.663982 #29]  INFO -- : Registered expected interaction GET /clients
+D, [2022-03-09T21:29:59.664474 #29] DEBUG -- : {
+  "description": "a request for all clients",
+  "providerState": "i have a list of clients",
+  "request": {
+    "method": "GET",
+    "path": "/clients",
+    "headers": {
+      "Accept": "application/json, text/plain, */*"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": {
+      "json_class": "Pact::ArrayLike",
+      "contents": {
+        "firstName": "Lisa",
+        "lastName": "Simpson",
+        "age": 8,
+        "id": 1
+      },
+      "min": 1
+    }
+  },
+  "metadata": null
+}
+I, [2022-03-09T21:29:59.671396 #29]  INFO -- : Received request GET /clients
+D, [2022-03-09T21:29:59.671673 #29] DEBUG -- : {
+  "path": "/clients",
+  "query": "",
+  "method": "get",
+  "headers": {
+    "Accept": "application/json, text/plain, */*",
+    "User-Agent": "axios/0.19.0",
+    "Host": "localhost:8081",
+    "Connection": "close",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-03-09T21:29:59.672001 #29]  INFO -- : Found matching response for GET /clients
+D, [2022-03-09T21:29:59.672262 #29] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "json_class": "Pact::ArrayLike",
+    "contents": {
+      "firstName": "Lisa",
+      "lastName": "Simpson",
+      "age": 8,
+      "id": 1
+    },
+    "min": 1
+  }
+}
+I, [2022-03-09T21:29:59.678152 #29]  INFO -- : Verifying - interactions matched
+I, [2022-03-09T21:29:59.682696 #29]  INFO -- : Cleared interactions
+I, [2022-03-09T21:29:59.691300 #29]  INFO -- : Registered expected interaction POST /clients
+D, [2022-03-09T21:29:59.691834 #29] DEBUG -- : {
+  "description": "a request for add clients",
+  "request": {
+    "method": "POST",
+    "path": "/clients",
+    "headers": {
+      "Content-Type": "application/json;charset=utf-8"
+    },
+    "body": {
+      "firstName": "Lisa",
+      "lastName": "Simpson",
+      "age": 8
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": {
+      "json_class": "Pact::SomethingLike",
+      "contents": {
+        "firstName": "Lisa",
+        "lastName": "Simpson",
+        "age": 8,
+        "id": 1
+      }
+    }
+  },
+  "metadata": null
+}
+I, [2022-03-09T21:29:59.700314 #29]  INFO -- : Received request POST /clients
+D, [2022-03-09T21:29:59.700640 #29] DEBUG -- : {
+  "path": "/clients",
+  "query": "",
+  "method": "post",
+  "body": {
+    "firstName": "Lisa",
+    "lastName": "Simpson",
+    "age": 8
+  },
+  "headers": {
+    "Content-Length": "49",
+    "Content-Type": "application/json;charset=utf-8",
+    "Accept": "application/json, text/plain, */*",
+    "User-Agent": "axios/0.19.0",
+    "Host": "localhost:8081",
+    "Connection": "close",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-03-09T21:29:59.701183 #29]  INFO -- : Found matching response for POST /clients
+D, [2022-03-09T21:29:59.701476 #29] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "json_class": "Pact::SomethingLike",
+    "contents": {
+      "firstName": "Lisa",
+      "lastName": "Simpson",
+      "age": 8,
+      "id": 1
+    }
+  }
+}
+I, [2022-03-09T21:29:59.708471 #29]  INFO -- : Verifying - interactions matched
+I, [2022-03-09T21:29:59.713743 #29]  INFO -- : Cleared interactions
+I, [2022-03-09T21:29:59.722588 #29]  INFO -- : Writing pact for clients-service to /app/pacts/frontend-clients-service.json
