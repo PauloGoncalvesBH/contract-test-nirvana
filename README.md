@@ -74,7 +74,9 @@ Para conseguir executar o teste do provider altere o arquivo [docker-compose](do
 
 A publicação de resultado da execução é feito apenas via CI e com token de escrita. (`publishVerificationResult: process.env.CI == 'true'`)
 
-## Webhook
+## Webhooks
+
+### Webhook de trigger de teste de contrato no Provider
 
 Quando o consumer publica um novo contrato é preciso garantir que o provider tenha feito execução encima desse contrato.
 
@@ -84,9 +86,31 @@ Para que isso ocorra é utilizado webhook no Pactflow que, ao identificar que fo
 
 A configuração do `can-i-deploy` na pipeline do consumer permite que aguarde a execução do teste de contrato pelo provider e a publicação do resultado para saber se é possível ou não prosseguir com o novo contrato.
 
-### Print da configuração de webhook utilizada
+#### Print de configuração do webhook de trigger:
 
-![Print de webhook](.github/webhook.png)
+![Print de configuração do webhook de trigger](.github/webhook-trigger.png)
+
+### Webhook para publicar resultado
+
+É importante que os times possuam visibilidade sobre a integração entre as aplicações, e a forma encontrada para isso no teste de contrato é publicar o resultado do teste de contrato executado no lado do provider no status do commit no repositório do consumer.
+
+Toda vez que o teste de contrato for executado do lado do provider, independentemente do status desse teste, será publicado no repositório do consumer o resultado da integração entre as aplicações com um link para o pactflow.
+
+> Será preciso criar 1 webhook para cada consumer
+
+#### Print de status do Pact no commit do Consumer
+
+O status no commit mostra quais provider verificaram o consumer publicado e quais tags foram executadas.
+
+No exemplo da imagem o consumer está integrando com sucesso com o provider _clients-service_ que está publicado em `production` e na branch `main`.
+
+Ao clicar em _details_ abrirá a página do Pactflow contendo o contrato publicado no commit e todos os detalhes da execução.
+
+![Print de status do Pact no commit do consumer](.github/status-commit.png)
+
+#### Print de configuração do webhook de status do resultado no commit:
+
+![Print de configuração do webhook de status do resultado no commit](.github/webhook-test-status.png)
 
 ---
 
