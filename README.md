@@ -5,6 +5,8 @@
 </div>
 <br>
 
+> **Gostaria de aprender teste de contrato do 0 ao avançado? Forneço treinamento prático, basta me contatar via [Linkedin](https://www.linkedin.com/in/paulo-goncalves) ou pelo e-mail consultoria@paulog.dev que envio a proposta com toda a grade e detalhes importantes.**
+
 ## Base de teste de contrato
 
 Para aproveitar o repositório da melhor maneira consulte os seguintes materiais, necessários para conhecer os conceitos de teste de contrato:
