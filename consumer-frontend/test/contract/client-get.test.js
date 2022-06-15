@@ -8,7 +8,7 @@ const { getClient, getClients } = require("../../src/consumer")
 describe('API Pact test - Integration between \'clients-service\' and \'frontend\'', () => {
   describe("GET /clients", () => {
     const expectedBody = {
-      firstName: 'Lisa',
+      firstName: 'Lis',
       lastName: 'Simpson',
       age: 8,
       id: 1
