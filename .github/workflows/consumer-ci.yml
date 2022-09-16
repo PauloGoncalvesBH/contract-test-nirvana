@@ -12,7 +12,7 @@ env:
 
 jobs:
   test-contract-consumer:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22-04
     name: Run consumer contract test
     steps:
     - name: Project checkout
@@ -36,7 +36,7 @@ jobs:
 
   # Runs on branches as well, so we know the status of our PRs
   can-i-deploy-to-production:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22-04
     needs: test-contract-consumer
     name: Can deploy consumer to 'production'?
     steps:
@@ -59,7 +59,7 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     needs: can-i-deploy-to-production
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22-04
     name: Deploy consumer to 'production'
     steps:
     - uses: actions/checkout@v2
@@ -71,7 +71,7 @@ jobs:
 
   tag-pact-contract-as-production:
     needs: deploy
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22-04
     name: Tag pact contract as 'production'
     steps:
     - uses: actions/checkout@v2

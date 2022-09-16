@@ -12,7 +12,7 @@ env:
 
 jobs:
   test-contract-provider:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22-04
     name: Run provider contract test
     steps:
     - name: Project checkout
@@ -23,7 +23,7 @@ jobs:
 
   # Runs on branches as well, so we know the status of our PRs
   can-i-deploy-to-production:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22-04
     needs: test-contract-provider
     name: Can deploy provider to 'production'?
     steps:
@@ -44,7 +44,7 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     needs: can-i-deploy-to-production
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22-04
     name: Deploy provider to 'production'
     steps:
     - uses: actions/checkout@v2
@@ -56,7 +56,7 @@ jobs:
 
   tag-verification-result-as-production:
     needs: deploy
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22-04
     name: Tag pact contract as 'production'
     steps:
     - uses: actions/checkout@v2
