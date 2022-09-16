@@ -1,71 +1,73 @@
 
 <div align="center">
-  <h1>Exemplo de 'Nirvana' do teste de contrato</h1>
-  <h4>Esse repositório exemplifica as melhores implementações de teste de contrato, atingindo o <i>nirvana</i> e tendo controle via pipeline e pact-broker de maneira totalmente confiável, fornecendo segurança para seguir com deploy.</h4>
+  <h1>Contract test example - Pact Nirvana</h1>
+  <h4>This repository exemplifies the best implementations of contract testing, reaching 'nirvana' and having control via pipeline and pact-broker in a completely reliable way, providing security to go ahead with deploy.</h4>
+  <b><i>Give the repository a star ⭐, it encourages me to create advanced software quality content 100% free</i></b>
 </div>
 <br>
 
-> **Gostaria de aprender teste de contrato do 0 ao avançado? Forneço treinamento prático, basta me contatar via [Linkedin](https://www.linkedin.com/in/paulo-goncalves) que envio a proposta com toda a grade e detalhes importantes.**
+> **Would you like to learn contract test from 0 to advanced? I provide practical training, just contact me via [Linkedin](https://www.linkedin.com/in/paulo-goncalves) and I'll send you the proposal with all the grid and important details.**
 
-## Base de teste de contrato
+## Contract test basis
 
-Para aproveitar o repositório da melhor maneira consulte os seguintes materiais, necessários para conhecer os conceitos de teste de contrato:
+To get the most out of the repository, see the following materials, which you need to learn about contract testing concepts:
 
-1. [Introduction - Documentação do Pact](https://docs.pact.io/)
-1. [AT Talks: Teste de contrato com Pact](https://www.youtube.com/watch?v=1c2JmM9dafA)
-1. [Testes de contratos com PACT #1 Conceitos - Vinícius Ribeiro](https://www.zup.com.br/blog/testes-de-contratos-com-pact-1-conceitos)
+1. [Introduction - Pact documentation](https://docs.pact.io/)
+1. [The steps for reaching Pact Nirvana - Pact documentation](https://docs.pact.io/pact_nirvana)
+1. [[Portuguese] AT Talks: Contract test with Pact - Paulo Gonçalves](https://www.youtube.com/watch?v=1c2JmM9dafA)
+1. [[Portuguese] Contract tests with PACT #1 Concepts - Vinícius Ribeiro](https://www.zup.com.br/blog/testes-de-contratos-com-pact-1-conceitos)
 
-## Sobre o repositório
+## About the repository
 
-O intuito desse material é demonstrar como deve ser a implementação de pipeline e testes de contrato de aplicações provider e consumer de forma com que siga o que é considerado o [Nirvana do Pact](https://docs.pact.io/pact_nirvana/).
+The purpose of this material is to demonstrate how the implementation of pipeline and contract testing of provider and consumer applications should be in a way that follows what is considered the [Pact Nirvana](https://docs.pact.io/pact_nirvana/).
 
-O diagrama abaixo é a representação do Nirvana do Pact que foi implementado nesse repositório.
+The diagram below is the representation of the Pact Nirvana that was implemented in this repository.
 
-![Diagrama - 'Nirvana' do teste de contrato](.github/diagrama-teste-de-contrato.png)
+![Diagram - Contract Test 'Nirvana'](.github/contract-test-diagram.png)
 
-O _pact-cli_ informado no diagrama se refere a comandos do [Pact Broker Client](https://github.com/pact-foundation/pact_broker-client).
+The _pact-cli_ informed in the diagram refers to [Pact Broker Client](https://github.com/pact-foundation/pact_broker-client) commands.
 
 ---
 
-# Aplicações
+# Applications
 
-As aplicações utilizadas estão divididas em 2 diretórios, tendo cada um seus arquivos fonte (_/src_), testes, dockerfile, package.json, etc, bem como cada aplicação tem sua pipeline implementada em [.github/workflows](./.github/workflows).
+The applications used are divided into 2 directories, each with its source files (_/src_), tests, dockerfile, package.json, etc., as well as each application has its pipeline implemented in [.github/workflows](./.github/workflows).
 
 ## Provider - clientsService
 
-O provider é a aplicação que provem API para ser consumido por outro serviço. Está em [provider-clients-service](./provider-clients-service).
+The provider is the application that provides an API to be consumed by another service. It's in [provider-clients-service](./provider-clients-service).
 
-> A [pipeline do provider](./.github/workflows/provider-ci.yml) é executada apenas quando há alteração fora do diretório `consumer-frontend` (_consumer_).
+> The [provider pipeline](./.github/workflows/provider-ci.yml) runs only when there is a change outside the `consumer-frontend` (_consumer_) directory.
 
 ## Consumer - Frontend
 
-O consumer é a aplicação que consome outra API. Pode também ser um provider. Está em [consumer-frontend](./consumer-frontend).
+The consumer is the application that consumes another API. It can also be a provider. It's in [consumer-frontend](./consumer-frontend).
 
-> A [pipeline do consumer](./.github/workflows/consumer-ci.yml) é executada apenas quando há alteração fora do diretório `provider-clients-service` (_provider_).
+> The [consumer pipeline](./.github/workflows/consumer-ci.yml) runs only when there is a change outside the `provider-clients-service` (_provider_) directory.
 
-# Execução
+# Execution
 
-## Pré-requisitos
+## Prerequisites
 
-- [Docker](https://docs.docker.com/get-docker/) e [Docker-compose](https://docs.docker.com/compose/install/) instalados.
+- [Docker](https://docs.docker.com/get-docker/) and [Docker-compose](https://docs.docker.com/compose/install/) installed.
 
-## Teste de contrato do Consumer
+## Consumer contract test
 
 ```sh
 make consumer-test-contract
 ```
 
-Após a execução é gerado o contrato em [consumer-frontend/pacts](./consumer-frontend/pacts) e [log](./consumer-frontend/logs).
+After execution, the contract is generated in [consumer-frontend/pacts](./consumer-frontend/pacts) and [log](./consumer-frontend/logs).
 
-Como demonstrado no diagrama, a publicação do pact gerado no Pactflow é feita utilizando o comando _publish_ do _pactfoundation/pact-cli_ e apenas no CI, como pode ser visto na pipeline [consumer-ci](.github/workflows/consumer-ci.yml).
+As shown in the diagram, publishing the generated pact in Pactflow is done using the _publish_ command from _pactfoundation/pact-cli_ and only in CI, as can be seen in the [consumer-ci](.github/workflows/consumer-ci.yml) pipeline.
 
-## Teste de contrato do Provider
+## Provider contract test
 
 ```sh
 make provider-test-contract
 ```
 
-Para conseguir executar o teste do provider altere o arquivo [docker-compose](docker-compose.yml) conforme o exemplo abaixo para utilizar o token de leitura do Pactflow e possibilitar que baixe os contratos publicados pelo consumer.
+To be able to run the provider test, change the [docker-compose](docker-compose.yml) file as shown in the example below to use the Pactflow read token and allow you to download the contracts published by the consumer.
 
 ```diff
     environment:
@@ -74,45 +76,45 @@ Para conseguir executar o teste do provider altere o arquivo [docker-compose](do
       - PACT_URL
 ```
 
-A publicação de resultado da execução é feito apenas via CI e com token de escrita. (`publishVerificationResult: process.env.CI == 'true'`)
+Publishing the execution result is done only via CI and with a writing token. (`publishVerificationResult: process.env.CI == 'true'`)
 
 ## Webhooks
 
-### Webhook de trigger de teste de contrato no Provider
+### Webhook that trigger test contract on Provider
 
-Quando o consumer publica um novo contrato é preciso garantir que o provider tenha feito execução encima desse contrato.
+When the consumer publishes a new contract, it is necessary to ensure that the provider has performed on top of this contract.
 
-Para que isso ocorra é utilizado webhook no Pactflow que, ao identificar que foi publicado contrato com conteúdo alterado ou uma nova tag (nova branch), trigga a pipeline do provider passando a URL desse contrato.
+For this to happen, a webhook is used in Pactflow which, when identifying that a contract with changed content or a new tag (new branch) has been published, triggers the provider's pipeline by passing the URL of this contract.
 
-> A pipeline chamada via webhook é a [provider-ci-triggered-by-webhook.yml](./.github/workflows/provider-ci-triggered-by-webhook.yml).
+> The pipeline called via webhook is [provider-ci-triggered-by-webhook.yml](./.github/workflows/provider-ci-triggered-by-webhook.yml).
 
-A configuração do `can-i-deploy` na pipeline do consumer permite que aguarde a execução do teste de contrato pelo provider e a publicação do resultado para saber se é possível ou não prosseguir com o novo contrato.
+The configuration of `can-i-deploy` in the consumer pipeline allows it to wait for the contract test to be executed by the provider and the publication of the result to know whether or not it is possible to proceed with the new contract.
 
-#### Print de configuração do webhook de trigger:
+#### Trigger webhook configuration print:
 
-![Print de configuração do webhook de trigger](.github/webhook-trigger.png)
+![Trigger webhook configuration print](.github/webhook-trigger.png)
 
-### Webhook para publicar resultado
+### Webhook to publish result
 
-É importante que os times possuam visibilidade sobre a integração entre as aplicações, e a forma encontrada para isso no teste de contrato é publicar o resultado do teste de contrato executado no lado do provider no status do commit no repositório do consumer.
+It is important that teams have visibility into the integration between applications, and the way found for this in contract testing is to publish the result of the contract test performed on the provider side in the commit status in the consumer repository.
 
-Toda vez que o teste de contrato for executado do lado do provider, independentemente do status desse teste, será publicado no repositório do consumer o resultado da integração entre as aplicações com um link para o pactflow.
+Every time the contract test is executed on the provider side, regardless of the status of this test, the result of the integration between the applications will be published in the consumer repository with a link to the pactflow.
 
-> Será preciso criar 1 webhook para cada consumer
+> You will need to create 1 webhook for each consumer
 
-#### Print de status do Pact no commit do Consumer
+#### Pact status print on Consumer commit
 
-O status no commit mostra quais provider verificaram o consumer publicado e quais tags foram executadas.
+The status on commit shows which providers have verified the published consumer and which tags have been executed.
 
-No exemplo da imagem o consumer está integrando com sucesso com o provider _clients-service_ que está publicado em `production` e na branch `main`.
+In the example in the image, the consumer is successfully integrating with the _client-service_ provider that is published in `production` and in the `main` branch.
 
-Ao clicar em _details_ abrirá a página do Pactflow contendo o contrato publicado no commit e todos os detalhes da execução.
+Clicking on _details_ will open the Pactflow page containing the contract published in the commit and all the execution details.
 
-![Print de status do Pact no commit do consumer](.github/status-commit.png)
+![Pact status print on Consumer commit](.github/commit-status.png)
 
-#### Print de configuração do webhook de status do resultado no commit:
+#### Output status webhook configuration print on commit:
 
-![Print de configuração do webhook de status do resultado no commit](.github/webhook-test-status.png)
+![Output status webhook configuration print on commit](.github/webhook-test-status.png)
 
 ---
 

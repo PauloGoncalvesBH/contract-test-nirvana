@@ -1,4 +1,4 @@
-name: Pipeline do provider
+name: Provider pipeline
 
 on:
   push:

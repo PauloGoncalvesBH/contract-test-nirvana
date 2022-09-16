@@ -1,4 +1,4 @@
-name: Pipeline do consumer
+name: Consumer pipeline
 
 on:
   push:
