@@ -1,17 +1,17 @@
-name: Teste de contrato do provider executado via webhook
+name: Provider contract test performed via webhook
 
 # https://docs.pact.io/pact_broker/overview/#webhooks
 
-# Quando um novo contrato é publicado pelo consumer (frontend) ele não foi executado
-# com nenhuma versão do provider, com isso o pactflow executa webhook que chama essa pipeline
-# e executa o teste de contrato do provider (clients-service), baixando diretamente
-# o novo contrato (através do 'pactUrl') e publicando o resultado no pactflow ao final.
+# When a new contract is published by the consumer (frontend) it was not executed
+# with any version of the provider, so the pactflow runs a webhook that calls this
+# pipeline and runs the provider contract test (clients-service), directly downloading
+# the new contract (via 'pactUrl') and publishing the result to pactflow at the end.
 
-# Com isso é possível garantir que todo novo contrato publicado é compatível ou não
-# com a versão do provider de produção.
+# With this it is possible to guarantee that every new contract published is
+# compatible or not with the version of the production provider.
 
-# É certo que será executado o consumer encima de provider de produção pois estou
-# fazendo checkout da branch default (main), que é aonde estão as tags de produção.
+# It is certain that the consumer will be executed on top of the production provider
+# because I am checking out the default branch (main), which is where the production tags are.
 
 on:
   repository_dispatch:

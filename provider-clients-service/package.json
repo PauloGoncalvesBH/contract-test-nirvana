@@ -1,11 +1,11 @@
 {
   "name": "clients-service",
-  "description": "Uma aplicação exemplo de Provider demonstrando teste de contrato",
-  "author": "Paulo Gonçalves <paulorochag@hotmail.com> (https://www.linkedin.com/in/paulo-goncalves/)",
+  "description": "A sample Provider application demonstrating contract testing",
+  "author": "Paulo Gonçalves <github@paulog.dev> (https://www.linkedin.com/in/paulo-goncalves/)",
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PauloGoncalvesBH/sample-teste-de-contrato.git"
+    "url": "https://github.com/PauloGoncalvesBH/nirvana-teste-de-contrato.git"
   },
   "scripts": {
     "start": "node ./src/providerService.js",
