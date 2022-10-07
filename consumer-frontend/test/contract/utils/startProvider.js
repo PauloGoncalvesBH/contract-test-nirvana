@@ -1,6 +1,6 @@
-const { Pact } = require("@pact-foundation/pact")
+const { PactV3 } = require("@pact-foundation/pact")
 
-global.mockProvider = new Pact({
+global.mockProvider = new PactV3({
   port: 8081,
   logLevel: 'INFO',
   consumer: 'frontend',

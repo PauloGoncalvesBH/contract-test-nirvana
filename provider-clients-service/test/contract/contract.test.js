@@ -25,7 +25,7 @@ describe("Clients Service Verification", () => {
       logLevel: 'INFO',
       pactBrokerToken: process.env.PACT_BROKER_TOKEN,
       providerBaseUrl: SERVER_URL,
-      providerVersionTags: currentGitBranch,
+      providerVersionTags: [ currentGitBranch ],
       providerVersion: currentGitHash,
       publishVerificationResult: process.env.CI == 'true',
       verbose: false,
@@ -52,7 +52,7 @@ describe("Clients Service Verification", () => {
     }
 
     const fetchPactsDynamicallyOptions = {
-      pactBrokerUrl: 'https://paulogoncalves.pactflow.io',
+      pactBrokerUrl: 'https://saflow.pactflow.io',
       consumerVersionSelectors: [
         {
           tag: currentGitBranch,
@@ -64,10 +64,14 @@ describe("Clients Service Verification", () => {
           latest: true
         }
       ],
-      // https://docs.pact.io/pact_broker/advanced_topics/pending_pacts
-      includeWipPactsSince: isDefaultBranch ? dateOneMonthAgo() : undefined,
       // https://docs.pact.io/pact_broker/advanced_topics/wip_pacts
-      enablePending: isDefaultBranch
+      enablePending: isDefaultBranch,
+      // https://docs.pact.io/pact_broker/advanced_topics/wip_pacts
+      ...(isDefaultBranch
+        ? {
+            includeWipPactsSince: dateOneMonthAgo(),
+          }
+        : {})
     }
 
     return new Verifier({
