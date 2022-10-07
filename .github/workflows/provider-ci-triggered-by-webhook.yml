@@ -10,8 +10,8 @@ name: Provider contract test performed via webhook
 # With this it is possible to guarantee that every new contract published is
 # compatible or not with the version of the production provider.
 
-# It is certain that the consumer will be executed on top of the production provider
-# because I am checking out the default branch (main), which is where the production tags are.
+# Using this webhook event allows the changed pact to be tested against the head, test and production versions of the provider, 
+# in the same way as the consumer version selectors allow the head, test and production versions of the pact to be tested against a version of the provider.
 
 on:
   repository_dispatch:

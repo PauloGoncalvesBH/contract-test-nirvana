@@ -74,7 +74,7 @@ jobs:
   associate-pact-contract-as-production:
     needs: deploy
     runs-on: ubuntu-22.04
-    name: Tag pact contract as 'production'
+    name: Associate pact contract as 'production'
     steps:
       - uses: actions/checkout@v2
       - run: docker pull pactfoundation/pact-cli:0.50.0.14

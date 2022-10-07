@@ -84,7 +84,7 @@ Publishing the execution result is done only via CI and with a writing token. (`
 
 When the consumer publishes a new contract, it is necessary to ensure that the provider has performed on top of this contract.
 
-For this to happen, a webhook is used in Pactflow which, when identifying that a contract with changed content or a new tag (new branch) has been published, triggers the provider's pipeline by passing the URL of this contract.
+For this to happen, a webhook is used in Pactflow which, when identifying that a contract with changed content or a new branch has been published, triggers the provider's pipeline by passing the URL of this contract.
 
 > The pipeline called via webhook is [provider-ci-triggered-by-webhook.yml](./.github/workflows/provider-ci-triggered-by-webhook.yml).
 
@@ -104,9 +104,9 @@ Every time the contract test is executed on the provider side, regardless of the
 
 #### Pact status print on Consumer commit
 
-The status on commit shows which providers have verified the published consumer and which tags have been executed.
+The status on commit shows which providers have verified the published consumer and which branch have been executed.
 
-In the example in the image, the consumer is successfully integrating with the _client-service_ provider that is published in `production` and in the `main` branch.
+In the example in the image, the consumer is successfully integrating with the _client-service_ provider that is deployed to `production` and in the `main` branch.
 
 Clicking on _details_ will open the Pactflow page containing the contract published in the commit and all the execution details.
 
