@@ -68,7 +68,7 @@ describe('API Pact test - Integration between \'clients-service\' and \'frontend
         headers: {
           "Content-Type": "application/json; charset=utf-8",
         },
-        body: Matchers.like(expectedBody),
+        body: MatchersV3.like(expectedBody),
       });
     })
 
