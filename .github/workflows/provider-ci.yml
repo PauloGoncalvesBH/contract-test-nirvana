@@ -68,6 +68,6 @@ jobs:
             -e PACT_BROKER_TOKEN \
             pactfoundation/pact-cli:0.50.0.14 \
             broker record-deployment \
-            --pacticipant frontend \
+            --pacticipant clients-service \
             --version ${{ github.sha }} \
             --environment production
