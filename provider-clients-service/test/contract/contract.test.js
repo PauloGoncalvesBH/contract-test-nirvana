@@ -25,7 +25,7 @@ describe("Clients Service Verification", () => {
       logLevel: 'INFO',
       pactBrokerToken: process.env.PACT_BROKER_TOKEN,
       providerBaseUrl: SERVER_URL,
-      providerVersionTags: [ currentGitBranch ],
+      providerVersionBranch: currentGitBranch,
       providerVersion: currentGitHash,
       publishVerificationResult: process.env.CI == 'true',
       verbose: false,
@@ -55,14 +55,14 @@ describe("Clients Service Verification", () => {
       pactBrokerUrl: 'https://saflow.pactflow.io',
       consumerVersionSelectors: [
         {
-          tag: currentGitBranch,
-          fallbackTag: 'main',
-          latest: true
+          mainBranch: true
         },
         {
-          tag: 'production',
-          latest: true
-        }
+          matchingBranch: true
+        },
+        {
+          deployed: true
+        },
       ],
       // https://docs.pact.io/pact_broker/advanced_topics/wip_pacts
       enablePending: isDefaultBranch,

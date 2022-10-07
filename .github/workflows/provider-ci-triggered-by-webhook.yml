@@ -15,7 +15,7 @@ name: Provider contract test performed via webhook
 
 on:
   repository_dispatch:
-    types: [pact-changed]
+    types: [contract_requiring_verification_published]
 
 jobs:
   test-contract:
@@ -26,10 +26,13 @@ jobs:
       - name: Project checkout
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.client_payload.providerProductionSha }}
+          ref: ${{ github.event.client_payload.sha }}
       - run: docker-compose build provider-test-contract
       - name: Run provider contract test
         run: make provider-test-contract
         env:
           PACT_URL: ${{ github.event.client_payload.pactUrl }}
+          GIT_COMMIT: ${{ github.event.client_payload.sha }}
+          GIT_BRANCH: ${{ github.event.client_payload.branch }}
+          DESCRIPTION: ${{ github.event.client_payload.message }}
           PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
