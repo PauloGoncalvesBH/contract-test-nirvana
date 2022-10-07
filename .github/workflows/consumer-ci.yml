@@ -71,14 +71,14 @@ jobs:
           echo "Deploying to production"
           echo "\n========== Deploy finished ==========\n"
 
-  associate-pact-contract-as-production:
+  associate-consumer-application-version-with-production:
     needs: deploy
     runs-on: ubuntu-22.04
-    name: Associate pact contract as 'production'
+    name: Associate consumer application version with 'production'
     steps:
       - uses: actions/checkout@v2
       - run: docker pull pactfoundation/pact-cli:0.50.0.14
-      - name: Associate the pact contract with 'production' environment
+      - name: Associate consumer application version with 'production' environment
         run: |
           docker run --rm \
             -e PACT_BROKER_BASE_URL \
