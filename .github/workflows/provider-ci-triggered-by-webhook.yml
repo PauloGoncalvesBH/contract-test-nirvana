@@ -10,7 +10,7 @@ name: Provider contract test performed via webhook
 # With this it is possible to guarantee that every new contract published is
 # compatible or not with the version of the production provider.
 
-# Using this webhook event allows the changed pact to be tested against the head, test and production versions of the provider, 
+# Using this webhook event allows the changed pact to be tested against the head, test and production versions of the provider,
 # in the same way as the consumer version selectors allow the head, test and production versions of the pact to be tested against a version of the provider.
 
 on:
