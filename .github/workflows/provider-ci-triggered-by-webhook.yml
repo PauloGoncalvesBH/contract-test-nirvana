@@ -31,7 +31,7 @@ jobs:
       - name: Run provider contract test
         run: make provider-test-contract
         env:
-          PACT_URL: ${{ github.event.client_payload.pactUrl }}
+          PACT_URL: ${{ github.event.client_payload.pact_url }}
           GIT_COMMIT: ${{ github.event.client_payload.sha }}
           GIT_BRANCH: ${{ github.event.client_payload.branch }}
           DESCRIPTION: ${{ github.event.client_payload.message }}
