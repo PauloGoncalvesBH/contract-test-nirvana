@@ -52,7 +52,7 @@ describe("Clients Service Verification", () => {
     }
 
     const fetchPactsDynamicallyOptions = {
-      pactBrokerUrl: 'https://saflow.pactflow.io',
+      pactBrokerUrl: 'https://paulogoncalves.pactflow.io',
       consumerVersionSelectors: [
         {
           tag: currentGitBranch,
