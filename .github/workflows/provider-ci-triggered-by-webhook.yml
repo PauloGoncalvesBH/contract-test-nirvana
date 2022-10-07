@@ -19,17 +19,17 @@ on:
 
 jobs:
   test-contract:
-    runs-on: ubuntu-22-04
-    name: Run provider contract 
+    runs-on: ubuntu-22.04
+    name: Run provider contract
 
     steps:
-    - name: Project checkout
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.client_payload.providerProductionSha }}
-    - run: docker-compose build provider-test-contract
-    - name: Run provider contract test
-      run: make provider-test-contract
-      env:
-        PACT_URL: ${{ github.event.client_payload.pactUrl }}
-        PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+      - name: Project checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.providerProductionSha }}
+      - run: docker-compose build provider-test-contract
+      - name: Run provider contract test
+        run: make provider-test-contract
+        env:
+          PACT_URL: ${{ github.event.client_payload.pactUrl }}
+          PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
