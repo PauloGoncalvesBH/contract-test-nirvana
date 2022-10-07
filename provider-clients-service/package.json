@@ -18,7 +18,7 @@
     "express-validation": "3.0.8"
   },
   "devDependencies": {
-    "@pact-foundation/pact": "9.16.1",
+    "@pact-foundation/pact": "10.1.4",
     "mocha": "8.4.0"
   }
 }
