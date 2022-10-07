@@ -8,7 +8,7 @@ consumer-test-contract:
 
 
 PACT_CLI="docker run --rm -v ${PWD}:${PWD} -e PACT_BROKER_BASE_URL -e PACT_BROKER_TOKEN pactfoundation/pact-cli"
-GITHUB_REPO := "you54f/contract-test-nirvana"
+GITHUB_REPO := "paulogoncalves/contract-test-nirvana"
 PROVIDER='clients-service'
 
 # export the GITHUB_TOKEN environment variable before running this
