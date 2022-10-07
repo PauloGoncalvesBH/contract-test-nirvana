@@ -13,6 +13,8 @@ services:
       - PACT_BROKER_TOKEN
       - PACT_URL
       - CI
+      - GIT_COMMIT
+      - GIT_BRANCH
 
   consumer-test-contract:
     build:
