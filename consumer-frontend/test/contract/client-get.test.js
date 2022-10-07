@@ -22,7 +22,7 @@ describe('API Pact test - Integration between \'clients-service\' and \'frontend
           method: "GET",
           path: "/clients",
           headers: {
-            Accept: "application/json, text/plain, */*",
+            Accept: "application/json",
           },
         },
         willRespondWith: {
@@ -59,7 +59,7 @@ describe('API Pact test - Integration between \'clients-service\' and \'frontend
           method: "GET",
           path: "/clients/123",
           headers: {
-            Accept: "application/json, text/plain, */*",
+            Accept: "application/json",
           },
         },
         willRespondWith: {

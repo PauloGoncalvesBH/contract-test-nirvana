@@ -17,7 +17,7 @@
     "express": "4.17.1"
   },
   "devDependencies": {
-    "@pact-foundation/pact": "9.16.1",
+    "@pact-foundation/pact": "10.1.4",
     "chai": "4.3.4",
     "del-cli": "4.0.1",
     "mocha": "8.4.0"
