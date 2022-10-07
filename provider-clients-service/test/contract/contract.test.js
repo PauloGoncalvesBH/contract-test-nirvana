@@ -25,7 +25,7 @@ describe("Clients Service Verification", () => {
       logLevel: 'INFO',
       pactBrokerToken: process.env.PACT_BROKER_TOKEN,
       providerBaseUrl: SERVER_URL,
-      providerVersionTags: currentGitBranch,
+      providerVersionTags: [ currentGitBranch ],
       providerVersion: currentGitHash,
       publishVerificationResult: process.env.CI == 'true',
       verbose: false,
