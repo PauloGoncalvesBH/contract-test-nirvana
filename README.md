@@ -78,6 +78,15 @@ To be able to run the provider test, change the [docker-compose](docker-compose.
 
 Publishing the execution result is done only via CI and with a writing token. (`publishVerificationResult: process.env.CI == 'true'`)
 
+### Publishing the contract to Pactbroker
+
+```sh
+PACT_BROKER_USERNAME="$(op read 'op://vgqmyqubm2vck2s44uqi5xadny/Pact Broker - Write Auth/username')" \
+PACT_BROKER_PASSWORD="$(op read 'op://vgqmyqubm2vck2s44uqi5xadny/Pact Broker - Write Auth/password')" \
+CI=true \
+make provider-test-contract
+```
+
 ## Webhooks
 
 ### Webhook that trigger test contract on Provider

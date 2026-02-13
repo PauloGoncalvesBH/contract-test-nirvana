@@ -1,11 +1,34 @@
 .PHONY: provider-test-contract consumer-test-contract 
 
 provider-test-contract:
-	@docker-compose run --rm provider-test-contract
+	@echo "\n================================================"
+	@echo "🚀 Running provider contract test..."
+	@echo "================================================\n"
+	@docker compose run --rm provider-test-contract
 
 consumer-test-contract:
-	@docker-compose run --rm consumer-test-contract
+	@echo "\n================================================"
+	@echo "🚀 Running consumer contract test..."
+	@echo "================================================\n"
+	@docker compose run --rm consumer-test-contract
 
+publish-contract-to-pactbroker:
+	@echo "\n================================================"
+	@echo "🚀 Publishing contract to Pactbroker..."
+	@echo "================================================\n"
+	@	docker run --rm \
+		-v ${PWD}/consumer-frontend/pacts:/app/pacts \
+		-e PACT_BROKER_BASE_URL=http://pact-broker-staging.groupondev.com \
+		-e PACT_BROKER_USERNAME="$(shell op read 'op://vgqmyqubm2vck2s44uqi5xadny/Pact Broker - Write Auth/username')" \
+		-e PACT_BROKER_PASSWORD="$(shell op read 'op://vgqmyqubm2vck2s44uqi5xadny/Pact Broker - Write Auth/password')" \
+		pactfoundation/pact-cli:1.5.0.3 \
+		pact-broker publish \
+		/app/pacts \
+		--consumer-app-version $(shell git rev-parse HEAD) \
+		--branch $(shell git branch --show-current)
+
+
+## Pactflow - Ignore this section
 
 PACT_CLI="docker run --rm -v ${PWD}:${PWD} -e PACT_BROKER_BASE_URL -e PACT_BROKER_TOKEN pactfoundation/pact-cli"
 GITHUB_REPO := "paulogoncalves/contract-test-nirvana"

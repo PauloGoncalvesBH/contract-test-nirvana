@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   provider-test-contract:
     build:
@@ -10,11 +8,13 @@ services:
       - ./provider-clients-service/test/contract:/app/test/contract
       - ./.git:/app/.git
     environment:
-      - PACT_BROKER_TOKEN
+      - PACT_BROKER_USERNAME
+      - PACT_BROKER_PASSWORD
       - PACT_URL
       - CI
-      - GIT_COMMIT
-      - GIT_BRANCH
+      - GIT_COMMIT=1
+      - GIT_BRANCH=pull-request-1
+      - PACT_DO_NOT_TRACK=true
 
   consumer-test-contract:
     build:

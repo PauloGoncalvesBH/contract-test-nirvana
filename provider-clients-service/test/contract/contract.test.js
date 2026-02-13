@@ -23,7 +23,8 @@ describe("Clients Service Verification", () => {
     const baseOptions = {
       provider: 'clients-service',
       logLevel: 'INFO',
-      pactBrokerToken: process.env.PACT_BROKER_TOKEN,
+      pactBrokerUsername: process.env.PACT_BROKER_USERNAME,
+      pactBrokerPassword: process.env.PACT_BROKER_PASSWORD,
       providerBaseUrl: SERVER_URL,
       providerVersionBranch: process.env.GIT_BRANCH ?? currentGitBranch,
       providerVersion: process.env.GIT_COMMIT ?? currentGitHash,
@@ -52,7 +53,7 @@ describe("Clients Service Verification", () => {
     }
 
     const fetchPactsDynamicallyOptions = {
-      pactBrokerUrl: 'https://paulogoncalves.pactflow.io',
+      pactBrokerUrl: 'http://pact-broker-staging.groupondev.com',
       consumerVersionSelectors: [
         {
           mainBranch: true

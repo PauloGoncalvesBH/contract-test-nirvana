@@ -4,16 +4,24 @@ const dateOneMonthAgo = () => {
   return date.toISOString()
 }
 
-const currentGitHash = require('child_process')
-  .execSync('git rev-parse HEAD')
-  .toString()
-  .trim()
+const getCurrentGitHash = () => {
+  if (process.env.GIT_COMMIT) return process.env.GIT_COMMIT
+  return require('child_process')
+    .execSync('git rev-parse HEAD')
+    .toString()
+    .trim()
+}
 
-const currentGitBranch = require('child_process')
-  .execSync('git branch --show-current')
-  .toString()
-  .trim()
+const getCurrentGitBranch = () => {
+  if (process.env.GIT_BRANCH) return process.env.GIT_BRANCH
+  return require('child_process')
+    .execSync('git branch --show-current')
+    .toString()
+    .trim()
+}
 
+const currentGitHash = getCurrentGitHash()
+const currentGitBranch = getCurrentGitBranch()
 const isDefaultBranch = currentGitBranch === 'main'
 
 module.exports = {
