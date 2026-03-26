@@ -16,7 +16,7 @@ describe('API Pact test - Integration between \'clients-service\' and \'frontend
 
     before (async () => {
       mockProvider
-      .given('i have a list of client')
+      .given('i have a list of clients')
       .uponReceiving('a request for all clients')
       .withRequest({
         method: "GET",
